@@ -1,0 +1,87 @@
+﻿@model ProyectoReservaciones.Models.ReservacionModel
+@{
+    ViewBag.Title = "Detalle Reservación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <div>
+        @Html.HiddenFor(Model => Model.idReservacion)
+    </div>
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <th colspan="2"><h1>Detalle de la reservación</h1></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.LabelFor(Model => Model.idReservacion)</td>
+                <td>@Html.DisplayFor(Model => Model.idReservacion)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(Model => Model.hotel)</td>
+                <td>@Html.DisplayFor(Model => Model.hotel)</td>
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(Model => Model.numHabitacion)</td>
+                <td>@Html.DisplayFor(Model => Model.numHabitacion)</td>
+            </tr>
+
+            <tr>
+                <td>@Html.LabelFor(Model => Model.nombreCompleto)</td>
+                <td>@Html.DisplayFor(Model => Model.nombreCompleto)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(Model => Model.fechaEntrada)</td>
+                <td>@Html.DisplayFor(Model => Model.fechaEntrada)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(Model => Model.fechaSalida)</td>
+                <td>@Html.DisplayFor(Model => Model.fechaSalida)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(Model => Model.numeroAdultos)</td>
+                <td>@Html.DisplayFor(Model => Model.numeroAdultos)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(Model => Model.numeroNinhos)</td>
+                <td>@Html.DisplayFor(Model => Model.numeroNinhos)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(Model => Model.costoTotal)</td>
+                <td>@Html.DisplayFor(Model => Model.costoTotal)</td>
+            </tr>
+        </tbody>
+        @if ((bool)Session["TipoUsuario"])
+        {
+            if (Model.estado == "A" & Model.fechaSalida > DateTime.Now)
+            {
+                @Html.ActionLink("Editar reservación", "EditarReservacion", "Reservacion", routeValues: new { idReservacion = Model.idReservacion }, htmlAttributes: new { @class = "" })
+            }
+            @Html.ActionLink("Regresar", "GestionarReservaciones", "Reservacion", null, new { @class = "btn btn-light" })
+        }
+        else
+        {
+            if (Model.estado == "A" & Model.fechaEntrada > DateTime.Now)
+            {
+                @Html.ActionLink("Editar reservación", "EditarReservacion", "Reservacion", routeValues: new { idReservacion = Model.idReservacion }, htmlAttributes: new { @class = "" })
+            }
+            @Html.ActionLink("Regresar", "ListaReservaciones", "Reservacion", null, new { @class = "btn btn-light" })
+        }
+
+        @if (Model.estado == "A" & Model.fechaSalida > DateTime.Now)
+        {
+            @Html.ActionLink("Cancelar reservación", "CancelarReservacion", "Reservacion", routeValues: new { idReservacion = Model.idReservacion }, htmlAttributes: new { onclick = "return confirm('¿Desea cancelar esta reservación?');", @class = "" })
+        }
+
+    </table>
+
+    @{
+        Html.RenderAction("Bitacora");
+    }
+</div>
+

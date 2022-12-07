@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+@model ProyectoReservaciones.Models.PersonaModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="~/Estilos/Login.css">
+</head>
+
+<body>
+    <div class="wrap">
+        @using (@Html.BeginForm("IniciarSesion", "Login", FormMethod.Get))
+        {
+            <div class="login-form">
+                <div class="form-header">
+                    <h3>Reservaciones</h3>
+                    <p>Inicio de sesión</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="form-group">
+                        @Html.EditorFor(Model => Model.email, new { htmlAttributes = new { placeholder = "Correo", id = "form-input" } })<br />
+                        @Html.ValidationMessageFor(Model => Model.email, "", new { @class = "text-danger", style = "display:none;" })
+                    </div>
+
+                    <div class="col-md-12" id="form-group">
+                        @Html.EditorFor(Model => Model.clave, new { htmlAttributes = new { placeholder = "Contraseña", id = "form-input" } })<br />
+                        @Html.ValidationMessageFor(Model => Model.clave, "", new { @class = "text-danger", style = "display:none;" })
+                    </div>
+
+                    <div class="col-md-12" id="form-group" style="text-align:right;" >
+                        <button type="submit" value="Iniciar Sesión" class="btn btn-success btn-md" id="form-button">Iniciar Sesión</button>
+                    </div>
+                    <div class="col-md-12" id="form-group">
+                        @ViewBag.Message
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</body>
+</html>

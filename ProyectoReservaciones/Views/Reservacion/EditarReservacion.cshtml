@@ -1,0 +1,75 @@
+﻿@model ProyectoReservaciones.Models.ReservacionModel
+@{
+    ViewBag.Title = "Modificar Reservación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="col-md-12">
+    @using (@Html.BeginForm("EditarReservacion", "Reservacion", FormMethod.Post))
+    {
+    <div class="form-group">
+        <div>
+            @Html.HiddenFor(Model => Model.idReservacion)
+            @Html.HiddenFor(Model => Model.idHabitacion)
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(Model => Model.hotel)<br />
+                @Html.DisplayFor(Model => Model.hotel)<br />
+                @Html.ValidationMessageFor(Model => Model.hotel, "", new { @class = "text-danger", style = "display:none;" })
+            </div>
+            <div class="col-md-12">
+                @Html.LabelFor(Model => Model.numHabitacion)<br />
+                @Html.DisplayFor(Model => Model.numHabitacion)<br />
+                @Html.ValidationMessageFor(Model => Model.numHabitacion, "", new { @class = "text-danger", style = "display:none;" })
+            </div>
+            <div class="col-md-12">
+                @Html.LabelFor(Model => Model.nombreCompleto)<br />
+                @Html.DisplayFor(Model => Model.nombreCompleto)<br />
+                @Html.ValidationMessageFor(Model => Model.nombreCompleto, "", new { @class = "text-danger", style = "display:none;" })
+            </div>
+            <div class="col-md-12">
+                @Html.LabelFor(Model => Model.fechaEntrada)<br />
+                @Html.EditorFor(Model => Model.fechaEntrada)<br />
+                @Html.ValidationMessageFor(Model => Model.fechaEntrada, "", new { @class = "text-danger", style = "display:none;" })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(Model => Model.fechaSalida)<br />
+                @Html.EditorFor(Model => Model.fechaSalida)<br />
+                @Html.ValidationMessageFor(Model => Model.fechaSalida, "", new { @class = "text-danger", style = "display:none;" })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(Model => Model.numeroAdultos)<br />
+                @Html.EditorFor(Model => Model.numeroAdultos)<br />
+                @Html.ValidationMessageFor(Model => Model.numeroAdultos, "", new { @class = "text-danger", style = "display:none;" })
+            </div>
+
+            <div class="col-md-12">
+                @Html.LabelFor(Model => Model.numeroNinhos)<br />
+                @Html.EditorFor(Model => Model.numeroNinhos)<br />
+                @Html.ValidationMessageFor(Model => Model.numeroNinhos, "", new { @class = "text-danger", style = "display:none;" })
+            </div>
+            <div class="col-md-12" style="text-align:right;">
+                <button type="submit" value="Guardar" class="btn btn-success btn-md">Guardar</button>
+                @if ((bool)Session["TipoUsuario"])
+                {
+                    @Html.ActionLink("Cancelar", "GestionarReservaciones", "Reservacion", null, new { @class = "btn btn-light" })
+                }
+                else
+                {
+                    @Html.ActionLink("Cancelar", "ListaReservaciones", "Reservacion", null, new { @class = "btn btn-light" })
+                }
+
+            </div>
+        </div>
+    </div>
+
+    }
+</div>
+
+

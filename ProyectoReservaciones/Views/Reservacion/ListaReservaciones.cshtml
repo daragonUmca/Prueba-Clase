@@ -1,0 +1,43 @@
+﻿@model List<ProyectoReservaciones.Models.ReservacionModel>
+@{
+    ViewBag.Title = "Mis reservaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mis Reservaciones</h2>
+
+<div class="col-md-12">
+        @Html.ActionLink("Nueva reservación", "CrearReservacion", "Reservacion", null, new { @class = "btn btn-primary" })
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.LabelFor(Model => Model[0].idReservacion)</th>
+                    <th>@Html.LabelFor(Model => Model[0].hotel)</th>
+                    <th>@Html.LabelFor(Model => Model[0].fechaEntrada)</th>
+                    <th>@Html.LabelFor(Model => Model[0].fechaSalida)</th>
+                    <th>@Html.LabelFor(Model => Model[0].costoTotal)</th>
+                    <th>@Html.LabelFor(Model => Model[0].estado)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(Model => Model[i].idReservacion)</td>
+                        <td>@Html.DisplayFor(Model => Model[i].hotel)</td>
+                        <td>@Html.DisplayFor(Model => Model[i].fechaEntrada)</td>
+                        <td>@Html.DisplayFor(Model => Model[i].fechaSalida)</td>
+                        <td>@Html.DisplayFor(Model => Model[i].costoTotal)</td>
+                        <td>@Html.DisplayFor(Model => Model[i].estado)</td>
+                        <td>
+                            @Html.ActionLink("Consultar", "DetalleReservacion", "Reservacion", routeValues: new { idReservacion = Model[i].idReservacion }, htmlAttributes: new { @class = "" })<br />
+                                @*@Html.ActionLink("Borrar", "Eliminar", "Leccion07", routeValues: new { idLibro = Model[i].idReservacion }, htmlAttributes: new { @class = "" })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>    
+</div>
+
+
+

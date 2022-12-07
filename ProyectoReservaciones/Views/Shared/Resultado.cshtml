@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Resultado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@ViewBag.mensajeResultado
+
+@if ((bool)Session["TipoUsuario"])
+{
+    @Html.ActionLink("Regresar", "GestionarReservaciones", "Reservacion", null, new { @class = "btn btn-light" })
+}
+else
+{
+    @Html.ActionLink("Regresar", "ListaReservaciones", "Reservacion", null, new { @class = "btn btn-light" })
+}
+
+
+

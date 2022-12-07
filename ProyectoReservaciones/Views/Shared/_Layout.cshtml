@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Scripts//bootstrap.min.css">
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+
+    @if (ViewBag.EsEmpleado)
+    {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">WebSiteName</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Mis reservaciones</a></li>
+                    <li><a href="#">Gestionar reservaciones</a></li>
+                    <li><a href="#">Gestionar habitaciones</a></li>
+                    <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", new { onclick = "return confirm('¿Desea cerrar la sesión?');" })</li>
+                    <li>@Session["NombreCompleto"]</li>
+                </ul>
+            </div>
+        </nav>
+    }
+    else if (!(ViewBag.EsEmpleado))
+    {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">WebSiteName</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Mis reservaciones</a></li>
+                    <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", new { onclick = "return confirm('¿Desea cerrar la sesión?');" })</li>
+                    <li><h5>@Session["NombreCompleto"]</h5></li>
+                </ul>
+            </div>
+        </nav>
+    }
+
+    <div id="render">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
